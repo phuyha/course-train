@@ -1,0 +1,50 @@
+[
+{"type":"header","version":"4.8.5","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"coursetrain"},
+{"type":"table","name":"answers","database":"coursetrain","data":
+[
+{"id":"1","content":"Xấu vcđ","questionId":"1"},
+{"id":"2","content":"javascript","questionId":"3"},
+{"id":"3","content":"C++","questionId":"3"},
+{"id":"4","content":"Công","questionId":"2"},
+{"id":"5","content":"Chắc chắn là Công","questionId":"2"},
+{"id":"6","content":"Tàm tạm","questionId":"1"},
+{"id":"7","content":"Xinh","questionId":"1"},
+{"id":"8","content":"Không thể xinh hơn","questionId":"1"},
+{"id":"9","content":"C sharp","questionId":"3"},
+{"id":"10","content":"Python","questionId":"3"},
+{"id":"11","content":"Hoàng","questionId":"2"},
+{"id":"12","content":"Mai","questionId":"2"}
+]
+}
+,{"type":"table","name":"courses","database":"coursetrain","data":
+[
+{"id":"1","name":"DayOne","descript":"Overview về công ty, vị trí và công việc mà nhân viên sẽ đảm nhiệm...Blabla...","valid":"1","total_time":"10"},
+{"id":"2","name":"ISMS","descript":"Khóa học đào tạo về bảo mật thông tin, bảo mật tài sản...","valid":"1","total_time":"60"},
+{"id":"3","name":"CMMI3","descript":"Đào tạo các quy định, chính sách mới về quản lý dự án theo tiêu chuẩn CMMI3","valid":"0","total_time":"20"},
+{"id":"4","name":"RegularExpression","descript":"Training skill về biểu thức chính quy và cách ứng dụng biểu thức chính quy trong lập trình","valid":"1","total_time":"1"},
+{"id":"5","name":"avcc","descript":"Perfect","valid":"1","total_time":"10"}
+]
+}
+,{"type":"table","name":"questions","database":"coursetrain","data":
+[
+{"id":"1","category":"Gái Xinh","type":"0","content":"Mai xinh hay xấu?","correctId":"1","courseId":"1"},
+{"id":"2","category":"Vớ vẩn","type":"1","content":"Tên bạn là gì?","correctId":"4,5","courseId":"1"},
+{"id":"3","category":"Vớ vẩn","type":"1","content":"Dự án bạn đang làm về ngôn ngữ gì?","correctId":"2,3","courseId":"1"}
+]
+}
+,{"type":"table","name":"users","database":"coursetrain","data":
+[
+{"id":"1","username":"kien.do","password":"111111","email":"kien.do@vietis.com.vn","fullname":"Đỗ Văn Kiên","position":"PM"},
+{"id":"2","username":"cong.nguyenchien","password":"222222","email":"cong.nguyenchien@vietis.com.vn","fullname":"Nguyễn Chiến Công","position":"DEV"},
+{"id":"3","username":"hoang.phanhuy","password":"333333","email":"hoang.phanhuy@vietis.com.vn","fullname":"Phan Huy Hoàng","position":"DEV"}
+]
+}
+,{"type":"table","name":"users_courses","database":"coursetrain","data":
+[
+{"userId":"1","courseId":"1","status":"0"},
+{"userId":"1","courseId":"2","status":"0"},
+{"userId":"2","courseId":"2","status":"0"}
+]
+}
+]
