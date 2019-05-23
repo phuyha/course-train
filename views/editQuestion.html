@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- <script>
             window.onload = function() {
-                document.querySelector('#msg').innerHTML = dialog.argument.questionById
-            alert(dialog.argument.questionById[0].id);
-            alert(dialog.argument.arrAnswerByQId[3].content);
+                
+            alert(dialog.argument.questionById[0].category);
+            alert(dialog.argument.arrAnswerByQId[2].content);
 
           };
-        </script>
+        </script> -->
 </head>
 
 <body>
-        <p id="msg"></p>
 
-    <p>Edit Answer</p>
-    <div class="input">
+
+    <p id="test">Edit Answer</p>
+    <div id="input">
         <input  type="hidden" class="input-edit" id="id-questions">
         Category <input class="input-edit" id="category-questions" type="text">
         Answer option <input id="single-questions" type="radio" name="choose-answer" value="single">Single
@@ -32,8 +34,10 @@
     <button id="dialog-ok">OK</button>
     <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
     <!-- SCRIPTS -->
+    
+
     <script src="../js/admin.js"></script>
-    <script src="../js/edit/editAnswer.js"></script>
+    <script src="../js/edit/editQuestion.js"></script>
     
 </body>
 

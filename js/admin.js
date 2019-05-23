@@ -113,14 +113,18 @@ window.onload = async function (e) {
                 );
             } else {
                 const answerByID = await mysql.getAnswerByID(id);
-
+                const questionById = await mysql.getQuestionById(answerByID[0].questionId);
+  
                 result = await eDialog.showDialog(
                     'file:///' + __dirname + '/editAnswer.html',
                     {
                         width: 800,
                         height: 400,
                     },
-                    answerByID,
+                    {
+                        answerByID,
+                        questionById
+                    }
                 );
             }
 
@@ -183,7 +187,7 @@ window.onload = async function (e) {
                             //     + '</tr>'
                             // $(answerRows[i]).replaceWith(content)
                             answerRows[i].querySelectorAll('td')[1].innerHTML = result.content;
-                            answerRows[i].querySelectorAll('td')[2].innerHTML = result.questionById;
+                            answerRows[i].querySelectorAll('td')[2].innerHTML = result.questionId;
                         }
                     }
                 }
