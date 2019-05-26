@@ -1,0 +1,279 @@
+* { 
+    box-sizing:border-box; 
+  }
+  
+  /* basic stylings ------------------------------------------ */
+  body 				 { 
+ 
+    background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg); 
+  }
+
+  .container 		{ 
+    font-family:'Roboto';
+    margin:30px auto 0; 
+    display:block; 
+    background:#FFF;
+    padding:10px 50px 50px;
+  }
+  h2 		 { 
+    text-align:center; 
+    margin-bottom:50px; 
+  }
+  h2 small { 
+    font-weight:normal; 
+    color:#888; 
+    display:block; 
+  }
+  .footer 	{ text-align:center; }
+  .footer a  { color:#53B2C8; }
+  
+  /* form starting stylings ------------------------------- */
+  .group 			  { 
+    position:relative; 
+    margin-bottom:45px; 
+  }
+  input 				{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #757575;
+  }
+  /* input:focus 		{ outline:none; } */
+  
+  /* LABEL ======================================= */
+  label 				 {
+    color:#999; 
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  
+  /* active state */
+  input:focus ~ label, input:valid ~ label 		{
+    top:-20px;
+    font-size:14px;
+    color:#5264AE;
+  }
+  
+  /* BOTTOM BARS ================================= */
+  /* .bar 	{ position:relative; display:block; width:300px; } */
+  .bar:before, .bar:after 	{
+    content:'';
+    height:2px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background:#5264AE; 
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  .bar:before {
+    left:50%;
+  }
+  .bar:after {
+    right:50%; 
+  }
+  
+  /* active state */
+  input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width:50%;
+  }
+  
+  /* HIGHLIGHTER ================================== */
+  .highlight {
+    position:absolute;
+    height:60%; 
+    width:100px; 
+    top:25%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+  }
+  
+  /* active state */
+  input:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+  }
+  
+  /* ANIMATIONS ================ */
+  @-webkit-keyframes inputHighlighter {
+      from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+  }
+  @-moz-keyframes inputHighlighter {
+      from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+  }
+  @keyframes inputHighlighter {
+      from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+  }
+  
+  
+  
+  /* CodePen demo */
+  body {
+    background: #2a2a2b;
+    color: #fff;
+    text-align: center;
+    font-family: Arial, Helvetica;
+  }
+  
+  .big {
+    font-size: 1.2em;
+  }
+  
+  .small {
+    font-size: .7em;
+  }
+  
+  .square {
+    width: .7em;
+    height: .7em;
+    margin: .5em;
+    display: inline-block;
+  }
+  
+  /* Custom dropdown */
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    /* margin: 10px; demo only */
+  }
+  
+  .custom-dropdown select {
+    background-color: #1abc9c;
+    color: #fff;
+    font-size: inherit;
+    padding: .5em;
+    padding-right: 2.5em; 
+    border: 0;
+    margin: 0;
+    border-radius: 3px;
+    text-indent: 0.01px;
+    text-overflow: '';
+    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  }
+  
+  .custom-dropdown::before,
+  .custom-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .custom-dropdown::after { /*  Custom dropdown arrow */
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -.5em;
+  }
+  
+  .custom-dropdown::before { /*  Custom dropdown arrow cover */
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .custom-dropdown select[disabled] {
+    color: rgba(0,0,0,.3);
+  }
+  
+  .custom-dropdown select[disabled]::after {
+    color: rgba(0,0,0,.1);
+  }
+  
+  .custom-dropdown::before {
+    background-color: rgba(0,0,0,.15);
+  }
+  
+  .custom-dropdown::after {
+    color: rgba(0,0,0,.4);
+  }
+  
+  .select-box {
+    float: left;
+    margin-left: 0px;
+  }
+  
+  
+  
+  
+  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+  
+  body {
+    background: #ffffff; 
+    color: #414141;
+    font: 400 17px/2em 'Source Sans Pro', sans-serif;
+  }
+  
+  .select-box {
+    cursor: pointer;
+    position : relative;
+    max-width:  20em;
+    margin: 5em auto;
+    width: 100%;
+  }
+  
+  .select,
+  .label {
+    color: #414141;
+    display: block;
+    font: 400 17px/2em 'Source Sans Pro', sans-serif;
+  }
+  
+  .select {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    padding: 5px 0;
+    height: 40px;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    background: none transparent;
+    border: 0 none;
+  }
+  .select-box1 {
+    background: #ececec;
+  }
+  
+  .label {
+    position: relative;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .open .label::after {
+     content: "▲";
+  }
+  .label::after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 15px;
+    border-left: 5px solid #fff;
+  }
+  
+  
+  
+  select {
+      float: left;
+  }

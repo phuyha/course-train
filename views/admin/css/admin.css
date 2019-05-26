@@ -1,0 +1,66 @@
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.right {
+    width: 100%;
+    margin: auto;
+    margin-left: -100px;
+}
+
+.right-top {
+    margin-bottom: 50px;
+}
+
+input[type=text] {
+    width: 50px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 3px 3px 3px 8px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  input[type=text]:focus {
+    width: 30%;
+  }
+
+/* .add {
+    background-color: crimson;
+} */
+
+/* .email {
+    background-color: violet;
+} */
+
+/* .right-bot {} */
+
+#btn-add {
+    margin-left: 30px;
+}
+
+#div-course, #div-question, #div-answer {
+    /* margin-top: -90px; */
+    display: none;
+}
+
+#input-search {
+    color: blue;
+}
+
+.th-1 {
+    width: 30px;
+}
+
+.th-2 {
+    width: 80px;
+}

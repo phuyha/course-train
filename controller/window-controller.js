@@ -15,6 +15,10 @@ ipcMain.on('openRegister', (event, user) => {
   windowSet.openRegister();
 });
 
+ipcMain.on('openAdmin', (event, user) => {
+  windowSet.openAdmin();
+});
+
 // Get event open login window
 ipcMain.on('openLogin', (event, user) => {
   windowSet.openLogin();

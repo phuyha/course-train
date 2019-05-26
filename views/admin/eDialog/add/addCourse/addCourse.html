@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Add Course</p>
+    <div class="input">
+        Name <input class="input-edit" id="name-course" type="text">
+        <label id="name_error_msg"></label>
+        </br>
+        Descript <input class="input-edit" id="descript-course" type="text">
+        <label id="descript_error_msg"></label>
+        </br>
+        Valid
+        <select id="valid-course">
+            <option value="0">Unavailable</option>
+            <option value="1">Available</option>
+        </select>
+        </br>
+
+        Total Time <input class="input-edit" id="total-course" type="text">
+        <label id="total_time_error_msg"></label>
+        </br>
+    </div>
+    <button id="dialog-ok">OK</button>
+    <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+    <!-- SCRIPTS -->
+    <script src="../admin/admin.js"></script>
+    <script src="../addCourse/addCourse.js"></script>
+
+</body>
+
+</html>

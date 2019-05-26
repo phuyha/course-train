@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- <script>
+            window.onload = function() {
+                
+            alert(dialog.argument.questionById[0].category);
+            alert(dialog.argument.arrAnswerByQId[2].content);
+          };
+        </script> -->
+</head>
+
+<body>
+
+
+    <p id="test">Edit Question</p>
+    <div id="input">
+        <input  type="hidden" class="input-edit" id="id-questions">
+        Category <input class="input-edit" id="category-questions" type="text">
+        <span id="category_error_msg"></span>
+        </br>
+        Answer option 
+        <select id="type-questions">
+            <option value="0">Single</option>
+            <option value="1">Multiple</option>
+        </select>
+        </br>
+        Content <input class="input-edit" id="content-questions" type="text">
+        <span id="content_error_msg"></span>
+        </br>
+        Course ID <input disabled class="input-edit" id="courseId-questions" type="text">
+        <span id="courseId_error_msg"></span>
+        </br>
+        
+    </div>
+
+    <button id="dialog-ok">OK</button>
+    <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+    <!-- SCRIPTS -->
+    
+
+    <script src="../admin/admin.js"></script>
+    <script src="../editQuestion/editQuestion.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../addQuestionAnswer/addQuestionAnswer.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <p id="test">Edit Answer</p>
+    <div id="input">
+        <input type="hidden" class="input-edit" id="id-questions">
+        </br>
+        Category <input class="input-edit" id="category-questions" type="text">
+        <p id="category_error_msg"></p>
+        </br>
+        <select id="type-questions">
+            <option value="0">Single</option>
+            <option value="1">Multiple</option>
+        </select>
+        </br> -->
+        Content <input class="input-edit" id="content-questions" type="text">
+        <span id="content_error_msg"></span>
+        </br> 
+        Answer option 
+         <select id="courseId-questions">
+
+        </select>
+        </br>
+        <input class="selected-answer" type="checkbox" value="1"> <input class="text-answer" id="answer-1" type="text">
+        </br>
+        <input class="selected-answer" type="checkbox" value="1"> <input class="text-answer" id="answer-2" type="text">
+        </br>
+        <input class="selected-answer" type="checkbox" value="1"> <input class="text-answer" id="answer-3" type="text">
+        </br>
+        <input class="selected-answer" type="checkbox" value="1"> <input class="text-answer" id="answer-4" type="text">
+        </br>
+        <input class="selected-answer" type="checkbox" value="1"> <input class="text-answer" id="answer-5" type="text">
+        <span id="corectId_error_msg"></span>
+    </div>
+
+    <div>
+            <button id="dialog-ok">OK</button>
+            <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+    </div>
+
+    
+    <!-- SCRIPTS -->
+
+
+    <script src="../admin/admin.js"></script>
+    <script src="../addQuestionAnswer/addQuestionAnswer.js"></script>
+
+</body>
+
+</html>
