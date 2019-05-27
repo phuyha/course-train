@@ -9,7 +9,7 @@ var linkSelected;
 
 const { remote } = require('electron');
 const mysql = require('../../model/model.js');
-mysql.initialize(); 
+mysql.initialize();
 
 const currWindow = remote.getCurrentWindow();
 
@@ -25,8 +25,8 @@ btnSearch.click(async (e) => {
 
         'file:///' + __dirname + '/eDialog/edit/editCourse.html',
         {
-            width: 400,
-            height: 300,
+            width: 500,
+            height: 800,
         },
         'simple dialog diaplaying test.',
     );
@@ -44,6 +44,20 @@ btnSearch.click(async (e) => {
     }
 
 })
+
+function getListCorrectId(listCorrect) {
+    const listCorrectId = listCorrect.split(",");
+    return listCorrectId;
+}
+
+function checkAnswerIsCorrectId(listCorrectId, id) {
+    for (i = 0; i < listCorrectId.length; i++) {
+        if (id == listCorrectId[i]) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // Load all data when window load
 window.onload = async function (e) {
@@ -69,15 +83,61 @@ window.onload = async function (e) {
         let id = href.split("?id=")[1];
 
         if (event === 'delete') {
-            const resultConfirm = getResultConfirmDialog();
+            if (linkSelected == "answers") {
+                let resultConfirm;
 
-            if (resultConfirm) {
-                await mysql.deleteByID(linkSelected, id);
-                rowDelete.remove();
-                console.log("OK")
+                let getAnswerById = await mysql.getAnswerById(id);
+
+                let questionId = getAnswerById[0].questionId;
+
+                let questionById = await mysql.getQuestionById(questionId);
+
+
+                if (questionById.length > 0) {
+                    let correctId = questionById[0].correctId
+                    console.log(correctId)
+                    let listCorrectId = getListCorrectId(correctId);
+
+                    console.log(listCorrectId)
+                    if (checkAnswerIsCorrectId(listCorrectId, getAnswerById[0].id)) {
+                        resultConfirm = getResultConfirmDialog("It's correct answer, You can't delete this answer");
+                    } else {
+                        resultConfirm = getResultConfirmDialog("Do you want to delete ?");
+                        if (resultConfirm) {
+                            await mysql.deleteByID(linkSelected, id);
+                            rowDelete.remove();
+
+                            console.log("OK")
+                        } else {
+                            console.log("NO")
+                        }
+                    }
+                } else {
+                    const resultConfirm = getResultConfirmDialog("Do you want to delete ?");
+                    if (resultConfirm) {
+                        await mysql.deleteByID(linkSelected, id);
+                        rowDelete.remove();
+
+                        console.log("OK")
+                    } else {
+                        console.log("NO")
+                    }
+                }
+
             } else {
-                console.log("NO")
+                const resultConfirm = getResultConfirmDialog("Do you want to delete ?");
+
+                if (resultConfirm) {
+                    await mysql.deleteByID(linkSelected, id);
+                    rowDelete.remove();
+                    console.log("OK")
+                } else {
+                    console.log("NO")
+                }
             }
+
+
+
         } else if (event === 'edit') {
             e.preventDefault();
 
@@ -90,8 +150,8 @@ window.onload = async function (e) {
                 result = await eDialog.showDialog(
                     'file:///' + __dirname + '/eDialog/edit/editCourse/editCourse.html',
                     {
-                        width: 800,
-                        height: 400,
+                        width: 600,
+                        height: 700,
                     },
                     courseByID,
                 );
@@ -117,8 +177,8 @@ window.onload = async function (e) {
                 result = await eDialog.showDialog(
                     'file:///' + __dirname + '/eDialog/edit/editAnswer/editAnswer.html',
                     {
-                        width: 800,
-                        height: 400,
+                        width: 600,
+                        height: 500,
                     },
                     {
                         answerByID,
@@ -148,7 +208,6 @@ window.onload = async function (e) {
                             courseRows[i].querySelectorAll('td')[1].innerHTML = result.descript;
                             courseRows[i].querySelectorAll('td')[2].innerHTML = result.name;
                             courseRows[i].querySelectorAll('td')[3].innerHTML = result.total_time;
-                            courseRows[i].querySelectorAll('td')[4].innerHTML = result.valid;
                         }
                     }
                 } else if (linkSelected == "questions") {
@@ -201,6 +260,47 @@ window.onload = async function (e) {
                 currWindow.show();
             }
 
+        } else if (event === 'status') {
+            e.preventDefault();
+
+            const statusRow = $('#div-course tr');
+
+            for (i = 1; i < [...statusRow].length; i++) {
+                const rowID = statusRow[i].querySelector('.course-id').innerHTML
+                const linkID = href.split("?id=")[1]
+
+
+                if (rowID == linkID) {
+                    // console.log(statusRow[i].querySelectorAll('td > a')[5])
+                    let validElem = statusRow[i].querySelectorAll('td>a')[0];
+                    if (validElem.innerHTML === 'No') {
+                        mysql.updateValidCourseById({
+                            valid: 1,
+                            id: linkID
+                        })
+
+                        validElem.innerHTML =  'Yes';
+                             
+                    } else {
+                        mysql.updateValidCourseById({
+                            valid: 0,
+                            id: linkID
+                        })
+
+                        validElem.innerHTML  = 'No';
+                    }
+
+                }
+            }
+
+            // mysql.updateByID("courses", {
+            //     id: result.id,
+            //     name: result.name,
+            //     descript: result.descript,
+            //     valid: result.valid,
+            //     total_time: result.total_time
+            // })
+
         }
     }
 
@@ -210,14 +310,16 @@ window.onload = async function (e) {
         currWindow.setEnabled(false);
         let result;
         const allCourse = await mysql.getAllCourses();
+        const idOfLastAnswer = await mysql.getTop1AnswerDESC();
+        const newIdAnswer = idOfLastAnswer[0].id;
 
         if (linkSelected === 'courses') {
             result = await eDialog.showDialog(
 
                 'file:///' + __dirname + '/eDialog/add/addCourse/addCourse.html',
                 {
-                    width: 800,
-                    height: 800,
+                    width: 600,
+                    height: 650,
                 },
                 allCourse,
             );
@@ -226,8 +328,7 @@ window.onload = async function (e) {
                 console.log("Vao OK")
                 // some procedures for 'OK' button clicked.
                 const top1Course = await mysql.getTop1CourseDESC();
-                const newIdCourse = top1Course[0].id + 1;
-
+                let newIdCourse = top1Course[0].id;
                 mysql.addCourse({
                     name: result.name,
                     descript: result.descript,
@@ -237,20 +338,19 @@ window.onload = async function (e) {
 
                 // Add new course into table
                 const contentCourse = '<tr>'
-                + `<td class="course-id">${newIdCourse}</td>`
-                + `<td>${result.descript}</td>`
-                + `<td class="course-name">${result.name}</td>`
-                + `<td>${result.total_time}</td>`
-                + `<td>${result.valid}</td>`
-                + '<td>' + `<a href='#status?id=${newIdCourse}' class='a-href'>Status</a>` + '</td>'
-                + '<td>' + `<a href='#edit?id=${newIdCourse}' class='a-href'>Edit</a>` + '</td>'
-                + '<td>' + `<a href='#delete?id=${newIdCourse}' class='a-href'>Delete</a>` + '</td>'
-                + '</tr>'
+                    + `<td class="course-id">${newIdCourse}</td>`
+                    + `<td>${result.descript}</td>`
+                    + `<td class="course-name">${result.name}</td>`
+                    + `<td>${result.total_time}</td>`
+                    + '<td>' + `<a href='#status?id=${newIdCourse}' class='a-href'>Status</a>` + '</td>'
+                    + '<td>' + `<a href='#edit?id=${newIdCourse}' class='a-href'>Edit</a>` + '</td>'
+                    + '<td>' + `<a href='#delete?id=${newIdCourse}' class='a-href'>Delete</a>` + '</td>'
+                    + '</tr>'
 
                 $("#table-course").append(contentCourse);
                 $(".a-href").unbind('click', handleAddEdit);
                 $(".a-href").bind('click', handleAddEdit);
-               
+
                 currWindow.setEnabled(true);
                 currWindow.show();
             } else {
@@ -263,10 +363,13 @@ window.onload = async function (e) {
 
                 'file:///' + __dirname + '/eDialog/add/addQuestionAnswer/addQuestionAnswer.html',
                 {
-                    width: 1300,
-                    height: 1200,
+                    width: 700,
+                    height: 650,
                 },
-                allCourse,
+                {
+                    allCourse,
+                    newIdAnswer
+                }
             );
 
             //     console.log("Wait dialog close")
@@ -298,7 +401,7 @@ window.onload = async function (e) {
                 $("#table-question").append(contentQuestion);
 
                 const top1Answer = await mysql.getTop1AnswerDESC();
-                const newIdAnswer = top1Answer[0].id + 1;
+                const newIdAnswer = top1Answer[0].id;
 
                 for (i = 0; i < result.arrAnswer.length; i++) {
                     mysql.addAnswerByQuestionId(result.arrAnswer[i], newId);
@@ -325,13 +428,15 @@ window.onload = async function (e) {
             }
         }
     });
+
+
 }
 
 
 
 // Load table with each data
 function loadTable(tableID, arrData) {
-    var content;
+    var content = "";
     // Set header
     if (tableID === '#div-course') {
         content += `<table id="table-course">`
@@ -340,7 +445,6 @@ function loadTable(tableID, arrData) {
             + '<th class="td-2">Descript</th>'
             + '<th class="td-1">Name</th>'
             + '<th class="td-1">Total time</th>'
-            + '<th class="td-1">Valid</th>'
             + '<th></th>'
             + '<th></th>'
             + '<th></th>'
@@ -372,16 +476,17 @@ function loadTable(tableID, arrData) {
         content += '<tr>'
         // Set data each table
         if (tableID === '#div-course') {
+
             content +=
                 `<td class="course-id">${arrData[i].id}</td>`
                 + `<td>${arrData[i].descript}</td>`
                 + `<td class="course-name">${arrData[i].name}</td>`
                 + `<td>${arrData[i].total_time}</td>`
-                + `<td>${arrData[i].valid}</td>`
-                + '<td>' + `<a href='#status?id=${arrData[i].id}' class='a-href'>Status</a>` + '</td>'
+                + `<td><a href='#status?id=${arrData[i].id}' class='a-href'>${arrData[i].valid === 0 ? 'No' : 'Yes'}</a>`
                 + '<td>' + `<a href='#edit?id=${arrData[i].id}' class='a-href'>Edit</a>` + '</td>'
                 + '<td>' + `<a href='#delete?id=${arrData[i].id}' class='a-href'>Delete</a>` + '</td>'
                 + '</tr>'
+
         } else if (tableID === '#div-question') {
             content +=
                 `<td class="question-id">${arrData[i].id}</td>`
@@ -492,9 +597,11 @@ $(document).ready(function () {
 });
 
 // Get result confirm dialog
-function getResultConfirmDialog() {
+function getResultConfirmDialog(message) {
     var txt;
-    var result = confirm("Do you want to delete ?");
+    var result = confirm(message);
     return result;
 }
+
+
 

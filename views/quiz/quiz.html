@@ -1,51 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz app interface</title>
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <meta charset="UTF-8">
+    <title>Quiz - App</title>
 
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css'>
+    <link rel='stylesheet' href='../../common/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700'>
+    <link rel='stylesheet' href='../../common/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="./quiz.css">
 
-      <link rel="stylesheet" href="../css/quiz.css">
-
-  
 </head>
 
 <body>
 
-  <section class="hero is-primary is-fullheight">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-mobile is-centered">
-        <div class="column is-half">
-          <div class="has-text-centered">
-          <h1 class="title has-text-centered">The awesome CSS quiz</h1>
-          <h7 class="subtitle has-text-centered is-uppercase is-7 navigation">QUESTION 1 OF 1</h7>
-          <h5 class="subtitle has-text-centered is-5">What does CSS stand for?</h5>
-          <p class="option has-text-grey-dark">
-            <span class="has-text-weight-bold is-size-5">A</span> Cascading Style Sheets
-          </p>
-          <p class="option has-text-grey-dark">
-            <span class="has-text-weight-bold is-size-5">B</span> Creative Style Sheets
-          </p>
-          <p class="option has-text-grey-dark">
-            <span class="has-text-weight-bold is-size-5">C</span> Computer Style Sheets
-          </p>
-          <p class="option has-text-grey-dark">
-            <span class="has-text-weight-bold is-size-5">D</span>  Colorful Style Sheets
-          </p>
-          <a class="button is-primary is-inverted is-outlined is-rounded is-fullwidth">Check my answer</a>
+    <div class="quiz-box-container">
+        <div class="wrapper">
+            <div class="quiz-box">
+                <div class="name-box">
+                    <span>Your Name?</span>
+                    </br>
+                    <form id="name-form">
+                        <input type="text" id="name-input-box" />
+                        </br>
+                        <button type="submit" id="name-submit-button">Submit</button>
+                    </form>
+                </div>
+                <div id="question-box">
+                </div>
+                <div id="result">
+                    <div class="score-label">
+                        <h1><i class="smiley"></i></h1>
+                    </div>
+                    <div>
+                        <div class="score-detail">
+                            <h3></h3>
+                        </div>
+                        <div class="chart">
+                            <div class="percentage" data-percent="100">
+                                <span></span><sup>%</sup>
+                            </div>
+                        </div>
+                        <h3 class="message"></h3>
+                    </div>
+                </div>
+                <div id="result-stats">
+                    <table>
+                        <tr>
+                            <th>Question</th>
+                            <th>You Selected</th>
+                            <th>Correct Answer</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="navigation-buttons">
+                <button id="prevButton">Previous</button>
+                <button id="nextButton">Next</button>
+                <button id="submitButton">Submit</button>
+                <button id="resultButton">Results</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
-  
-  
-
+    <script src='../../common/jquery/jquery.min.js'></script>
+    <script src='../../common/jquery/jquery.easy-pie-chart.js'></script>
+    <script src="./quiz.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,4 @@
 const { remote, ipcRenderer } = require('electron');
-console.log('remote login: '+ remote)
 const userData = remote.require('./model/model.js');
 const $ = require('jquery');
 
@@ -26,17 +25,17 @@ $('#login-button').click(async () => {
     } else {
         if (user[0].position === 'PM') {
             console.log("Login pm");
-            ipcRenderer.send('openAdmin', user[0]);
+            ipcRenderer.send('open-admin', user[0]);
         }
 
         if (user[0].position === 'DEV') {
             console.log("Login dev");
-            ipcRenderer.send('openCourse', user[0]);
+            ipcRenderer.send('open-course', user[0]);
         }
     }
 
 });
 
 $('#register-button').click(() => {
-    ipcRenderer.send('openRegister');
+    ipcRenderer.send('open-register');
 });

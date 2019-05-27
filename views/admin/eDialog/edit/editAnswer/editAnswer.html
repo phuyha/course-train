@@ -6,21 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../editAnswer/editAnswer.css" />
+
 </head>
 
 <body>
-
     <p>Edit Answer</p>
-    <p id="msg"></p>
+
     <div class="input">
-        <input  type="hidden" class="input-edit" id="id-answer">
-        Question <input disabled class="input-edit" id="questionId-answer" type="text">
-    </br>
-        Content <input class="input-edit" id="content-answer" type="text">
-        <span id="content_error_msg"></span>
+        <input type="hidden" class="input-edit" id="id-answer">
+        <h1 class="not-first-h1">Question</h1>
+        <input disabled class="input-edit" id="questionId-answer" type="text">
+
+        <h1 class="not-first-h1">Content</h1>
+        <input class="input-edit" id="content-answer" type="text">
+        <label id="content_error_msg"></label>
     </div>
-    <button id="dialog-ok">OK</button>
-    <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+
+    <input type="button" id="dialog-ok" value="OK">
+    <input type="button" id="dialog-cancle" onclick="dialog.exit('cancel')" value="Cancle">
     <!-- SCRIPTS -->
     <script src="../admin/admin.js"></script>
     <script src="../editAnswer/editAnswer.js"></script>
