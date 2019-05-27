@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p>Edit Answer</p>
+    <p id="msg"></p>
+    <div class="input">
+        <input  type="hidden" class="input-edit" id="id-answer">
+        Question <input disabled class="input-edit" id="questionId-answer" type="text">
+    </br>
+        Content <input class="input-edit" id="content-answer" type="text">
+        <span id="content_error_msg"></span>
+    </div>
+    <button id="dialog-ok">OK</button>
+    <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+    <!-- SCRIPTS -->
+    <script src="../admin/admin.js"></script>
+    <script src="../editAnswer/editAnswer.js"></script>
+
+</body>
+
+</html>
