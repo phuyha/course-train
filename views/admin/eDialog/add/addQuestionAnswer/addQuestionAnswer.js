@@ -2,10 +2,10 @@ const args = dialog.argument;
 
 // When window load
 window.onload = function () {
-    for(i = 0; i < args.length; i++) {
+    for(i = 0; i < args.allCourse.length; i++) {
         var option = document.createElement('option');
-        option.text = args[i].name;
-        option.value = args[i].id;
+        option.text = args.allCourse[i].name;
+        option.value = args.allCourse[i].id;
         document.getElementById("courseId-questions").add(option, 0);  
     }
 };
@@ -38,16 +38,17 @@ function validate(category, content) {
     // Count all answer
     let countAnswer = 0;
     for (i = 0; i < listAnswer.length; i++) {
+
         if (listAnswer[i].value) {
             countAnswer++;
         }
     }
-
     // Count number of checkbox correct question
     const listCheckBox = document.querySelectorAll("input[type='checkbox']");
     let countCorrectId = 0;
     for(i = 0; i < listCheckBox.length; i++) {
-        if (listCheckBox[i].checked == true) {
+        const answer = document.querySelector(`#answer-${i+1}`).value
+        if (listCheckBox[i].checked == true && answer) {
             countCorrectId++;
         }
     }
@@ -55,8 +56,8 @@ function validate(category, content) {
     // Check number of answer at least 3 questions
     if (countAnswer < 3) {
         resetErrorMessage();
-        document.querySelector('#content_error_msg').innerHTML = "You must enter at least 4 questions";
-        document.querySelector('#content_error_msg').style.display = "block";
+        document.querySelector('#corectId_error_msg').innerHTML = "Enter at least 3 questions";
+        document.querySelector('#corectId_error_msg').style.display = "block";
         return false;
     } else {
         // Check select single correctId and don't select any checkbox
@@ -79,15 +80,14 @@ function validate(category, content) {
 
 // Reset error message
 function resetErrorMessage() {
-    document.querySelector('#category_error_msg').style.display = "block";
-    document.querySelector('#content_error_msg').style.display = "block";
-    document.querySelector('#corectId_error_msg').style.display = "block";
+    document.querySelector('#category_error_msg').style.display = "none";
+    document.querySelector('#content_error_msg').style.display = "none";
+    document.querySelector('#corectId_error_msg').style.display = "none";
 }
 
 document.querySelector('#dialog-ok')
 
     .addEventListener('click', () => {
-
         const category = document.querySelector('#category-questions').value;
         const type = document.querySelector('#type-questions').value;
         const content = document.querySelector('#content-questions').value;
@@ -96,9 +96,11 @@ document.querySelector('#dialog-ok')
         // const length =  [...document.querySelectorAll(".selected-answer")].length
         // const data = [...document.querySelectorAll(".selected-answer")][1].value;
         
-        // Get array correct Answer
+       
+    // Get array correct Answer
         let correctId = "";
-        let correctIdIndex = 0;
+        let correctIdIndex = args.newIdAnswer;
+    
         for (i = 0; i < [...document.querySelectorAll(".selected-answer")].length; i++) {
             const checked = [...document.querySelectorAll(".selected-answer")][i].checked;
             const answer = document.querySelector(`#answer-${i+1}`).value;
@@ -107,13 +109,12 @@ document.querySelector('#dialog-ok')
             if (answer) {
                 correctIdIndex++;
             }
-
+            
             // Check checkbox is checked and answer have data then add correctId
             if (checked && answer) {
                 correctId += `${correctIdIndex},`;
             }
         }
-
         // Get array Answer
         let arrAnswer = [];
         let listAnswer = document.querySelectorAll("input[class='text-answer']");
@@ -125,8 +126,8 @@ document.querySelector('#dialog-ok')
         }
 
         newCorrectId = correctId.substring(0, correctId.length-1);
-
         if (validate(category, content)) {
+
             dialog.exit({
                 action: 'ok',
                 category: category,

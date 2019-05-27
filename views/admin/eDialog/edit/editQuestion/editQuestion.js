@@ -1,6 +1,3 @@
-// const mysql = require('../db/db.js');
-// const $ = require('jquery');
-
 const args = dialog.argument;
 
 document.querySelector("#id-questions").value = args.questionById[0].id;
@@ -18,15 +15,38 @@ function getListCorrectId() {
 // Load checkbox with CorrectId is checked
 for (i = 0; i < args.arrAnswerByQId.length; i++) {
     var d1 = document.getElementById('input');
-    const listCorrectId = getListCorrectId();
-    d1.insertAdjacentHTML('beforeend', `<input id=${i} type="checkbox" name="correctId" value="${i}">${args.arrAnswerByQId[i].content}</input></br>`);
+    // alert(listCorrectId[0])
+    // alert(listCorrectId[1])
 
-    for (j = 0; j < listCorrectId.length; j++) {
-        if (listCorrectId[j] == (i + 1)) {
-            document.getElementById(`${i}`).checked = true;
-        } 
-    } 
+
+    d1.insertAdjacentHTML('beforeend', `<input id=${args.arrAnswerByQId[i].id} type="checkbox" name="correctId" value="${args.arrAnswerByQId[i].id}">${args.arrAnswerByQId[i].content}</input></br>`);
+    // alert(document.querySelectorAll("input[type='checkbox']").length)
+
+    // let lengthCorrectId = listCorrectId[listCorrectId.length-1];
+    // alert(lengthCorrectId)
+    // for (j = 0; j < lengthCorrectId; j++) {
+    //     if (j == i) {
+    //         document.getElementById(`${i}`).checked = true;
+    //     } 
+    // } 
 }
+
+let listCorrectId = getListCorrectId();
+// alert(listCorrectId)
+    for (i = 0; i < document.querySelectorAll("input[type='checkbox']").length; i++) {
+        for (j = 0; j < listCorrectId.length; j++) {
+            // alert(listCorrectId[i])
+            // alert(document.querySelectorAll("input['type=text]'")[i].value)
+           
+            // alert(
+            //     document.querySelectorAll("input[type='checkbox']")[i].value
+            // )
+            if (listCorrectId[j] == document.querySelectorAll("input[type='checkbox']")[i].value) {
+                document.querySelectorAll("input[type='checkbox']")[i].checked = true;
+            }
+        }
+    }
+
 d1.insertAdjacentHTML('beforeend', `<span id="corectId_error_msg"></span>`);
 
 // Validate input field
@@ -56,23 +76,23 @@ function validate(category, content) {
     const listCheckBox = document.querySelectorAll("input[type='checkbox']");
 
     let countCorrectId = 0;
-    for(i = 0; i < listCheckBox.length; i++) {
+    for (i = 0; i < listCheckBox.length; i++) {
         if (listCheckBox[i].checked == true) {
             countCorrectId++;
         }
     }
-    
+
     // Check select single correctId and don't select any checkbox
     if (document.querySelector("#type-questions").value == 0) {
         if (countCorrectId > 1 || countCorrectId == 0) {
             document.querySelector('#corectId_error_msg').innerHTML = "Please choose single answer";
             return false;
-        } 
+        }
     } else if (document.querySelector("#type-questions").value == 1) {
         if (countCorrectId < 2 || countCorrectId == 0) {
             document.querySelector('#corectId_error_msg').innerHTML = "Please choose multiple answer";
             return false;
-        } 
+        }
     }
 
     return true;
@@ -95,14 +115,14 @@ document.querySelector('#dialog-ok')
         let category = document.querySelector('#category-questions').value;
         let type = document.querySelector('#type-questions').value;
         let content = document.querySelector('#content-questions').value;
-        
+
         let correctId = "";
         for (i = 0; i < args.arrAnswerByQId.length; i++) {
             if (document.getElementById(`${i}`).checked) {
-                correctId += `${i+1},`;
+                correctId += `${i + 1},`;
             }
         }
-        newCorrectId = correctId.substring(0, correctId.length-1);
+        newCorrectId = correctId.substring(0, correctId.length - 1);
         const courseId = args.questionById[0].courseId
 
 
@@ -118,7 +138,7 @@ document.querySelector('#dialog-ok')
                 args: args
             });
         }
-       
+
     });
-    
+
 

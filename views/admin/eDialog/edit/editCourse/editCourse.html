@@ -5,28 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Edit Course</title>
+    <link rel="stylesheet" type="text/css" href="../editCourse/editCourse.css" />
+
 </head>
 
 <body>
     <p>Edit Course</p>
     <div class="input">
-        ID <input disabled class="input-edit" id="id-course" type="text">
-        </br>
-        Name <input class="input-edit" id="name-course" type="text">
-        <span id="name_error_msg"></span>
-        </br>
-        Descript <input class="input-edit" id="descript-course" type="text">
-        <span id="descript_error_msg"></span>
-        </br>
-        Valid <input type="radio" class="input-edit unavailable" id="valid-course" name="valid"> Unavailable
-        <input type="radio" class="input-edit available" id="valid-course" name="valid"> Available
-        </br>
-        Total Time <input class="input-edit" id="total-course" type="text">
-        <span id="total_time_error_msg"></span>
+
+        <h1 class="not-first-h1">ID</h1>
+        <input disabled class="input-edit" id="id-course" type="text">
+
+        <h1 class="not-first-h1">Name</h1>
+        <input class="input-edit" id="name-course" type="text">
+        <label id="name_error_msg"></label>
+
+        <h1 class="not-first-h1">Descript</h1>
+        <input class="input-edit" id="descript-course" type="text">
+        <label id="descript_error_msg"></label>
+
+        <h1 class="not-first-h1">Valid</h1>
+        <label class="container"> <span class="valid">Unavailable</span>
+                <input type="radio" class="input-edit unavailable" id="valid-course" name="radio">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="container"> <span class="valid">Available</span>
+                <input type="radio" class="input-edit available" id="valid-course" name="radio">
+            <span class="checkmark"></span>
+        </label>
+
+
+        <h1 class="not-first-h1">Total Time</h1>
+        <input class="input-edit" id="total-course" type="text">
+        <label id="total_time_error_msg"></label>
+
     </div>
-    <button id="dialog-ok">OK</button>
-    <button id="dialog-cancle" onclick="dialog.exit('cancel')">Cancel</button>
+
+    <div>
+        <input type="button" id="dialog-ok" value="OK">
+        <input type="button" id="dialog-cancle" onclick="dialog.exit('cancel')" value="Cancle">
+    </div>
+
     <!-- SCRIPTS -->
     <script src="../admin/admin.js"></script>
     <script src="../editCourse/editCourse.js"></script>
